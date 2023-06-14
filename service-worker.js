@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/employee-table-sort-search/precache-manifest.e6826e0f871722ff35bf4d822e433384.js"
+  "/employee-table-sort-search/precache-manifest.3fafc73187dbcb8d8ac08a3b211ca7a0.js"
 );
 
 workbox.clientsClaim();
