@@ -293,18 +293,7 @@ describe("EmployeeTable", () => {
     const sortedEmployees = screen
       .getAllByTestId("employee-info-row")
       .map((row) => row.querySelector("td:first-child").textContent);
-    const expectedOrder = [
-      "Ardenia",
-      "Barrett",
-      "Carce",
-      "Dory",
-      "Fraze",
-      "Marilin",
-      "Sabine",
-      "Tabby",
-      "Terrell",
-      "Thorsten",
-    ];
+    const expectedOrder =  ["Ardenia", "Barrett", "Belvia", "Carce", "Doralia", "Dory", "Fraze", "Geoffry", "Hesther", "Karlis", "Marilin", "Marsiella", "Marta", "Michel", "Raimondo", "Rosemonde", "Ryan", "Sabine", "Tabby", "Terrell", "Thorsten", "Wyatan", "Zackariah"];
     expect(sortedEmployees).toEqual(expectedOrder);
   });
 
@@ -322,22 +311,11 @@ describe("EmployeeTable", () => {
     const sortedEmployees = screen
       .getAllByTestId("employee-info-row")
       .map((row) => row.querySelector("td:nth-child(2)").textContent);
-    const expectedOrder = [
-      "Suermeiers",
-      "Straun",
-      "Spikings",
-      "Sleicht",
-      "Sebert",
-      "Nice",
-      "Harborow",
-      "Gresty",
-      "Berntsson",
-      "Atter",
-    ];
+    const expectedOrder =  ["Yerlett", "Tegeller", "Tarn", "Suermeiers", "Straun", "Spirit", "Spikings", "Sleicht", "Sebert", "Rigbye", "Nice", "Ilden", "Huster", "Hebson", "Heaker", "Harborow", "Hanaford", "Gresty", "Giraudo", "Bough", "Berntsson", "Bakhrushkin", "Atter"];
     expect(sortedEmployees).toEqual(expectedOrder);
   });
 
-  test("filters employees by salary when a salary option is selected less than 10k", () => {
+  test("filters employees by salary when a salary option is selected less than 25k", () => {
     render(
       <Provider store={store}>
         <EmployeeTable />
@@ -347,13 +325,13 @@ describe("EmployeeTable", () => {
     const dropdownToggle = screen.getByText("Filter by Salary");
     fireEvent.click(dropdownToggle);
 
-    const dropdownItem = screen.getByText("Less than $10,000");
+    const dropdownItem = screen.getByText("Less than $25,000");
     fireEvent.click(dropdownItem);
 
     const lessThan10k = screen.getAllByTestId("employee-info-row");
-    expect(lessThan10k.length).toBe(1);
+    expect(lessThan10k.length).toBe(5);
   });
-  test("filters employees by salary when a salary option is selected  10k - 20k", () => {
+  test("filters employees by salary when a salary option is selected  25k - 50k", () => {
     render(
       <Provider store={store}>
         <EmployeeTable />
@@ -363,13 +341,13 @@ describe("EmployeeTable", () => {
     const dropdownToggle = screen.getByText("Filter by Salary");
     fireEvent.click(dropdownToggle);
 
-    const dropdownItem = screen.getByText("$10,000 - $20,000");
+    const dropdownItem = screen.getByText("$25,000 - $50,000");
     fireEvent.click(dropdownItem);
 
     const lessThan10k = screen.getAllByTestId("employee-info-row");
-    expect(lessThan10k.length).toBe(1);
+    expect(lessThan10k.length).toBe(3);
   });
-  test("filters employees by salary when a salary option is selected  20k - 30k", () => {
+  test("filters employees by salary when a salary option is selected  50k - 100k", () => {
     render(
       <Provider store={store}>
         <EmployeeTable />
@@ -379,10 +357,10 @@ describe("EmployeeTable", () => {
     const dropdownToggle = screen.getByText("Filter by Salary");
     fireEvent.click(dropdownToggle);
 
-    const dropdownItem = screen.getByText("$20,000 - $30,000");
+    const dropdownItem = screen.getByText("$50,000 - $100,000");
     fireEvent.click(dropdownItem);
 
     const lessThan10k = screen.getAllByTestId("employee-info-row");
-    expect(lessThan10k.length).toBe(1);
+    expect(lessThan10k.length).toBe(15);
   });
 });

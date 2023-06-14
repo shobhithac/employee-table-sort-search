@@ -6,7 +6,6 @@ interface ITableBody {
   columns: any;
 }
 const TableBody: FC<ITableBody> = ({ tableData, columns }) => {
-  console.log(tableData);
   return (
     <tbody>
       {tableData.length === 0 ? (

@@ -30,8 +30,8 @@ const EmployeeTable = () => {
   const [employeesList, setEmployeesList] = useState<Employee[]>([]);
   const [paginated, setPaginated] = useState<Employee[]>([]);
   const [currentPage, setCurrentPage] = useState(0);
-  const [perPage] = useState(10);
-
+  const [perPage] = useState(25);
+const [search, setSearch] = useState('')
   const startCount = currentPage === 0 ? 1 : currentPage * perPage + 1;
   const endCount = currentPage === 0 ? perPage : (currentPage + 1) * perPage;
 
@@ -70,14 +70,14 @@ const EmployeeTable = () => {
     if (value === "all") {
       setPaginated(paginatedData);
     } else {
-      if (value === "10000") {
-        maxSalary = 10000;
-      } else if (value === "20000") {
-        minSalary = 10000;
-        maxSalary = 20000;
-      } else if (value === "30000") {
-        minSalary = 20000;
-        maxSalary = 30000;
+      if (value === "25000") {
+        maxSalary = 25000;
+      } else if (value === "50000") {
+        minSalary = 25000;
+        maxSalary = 50000;
+      } else if (value === "100000") {
+        minSalary = 50000;
+        maxSalary = 100000;
       }
       const filtered = paginatedData.filter((employee) => {
         const salary = parseFloat(
@@ -91,6 +91,7 @@ const EmployeeTable = () => {
 
   const handleNameSearch = (event: any) => {
     const input = event.target.value.toLowerCase();
+    setSearch(input)
     const paginatedData = employeesList.slice(
       perPage * currentPage,
       perPage * currentPage + perPage
@@ -103,6 +104,10 @@ const EmployeeTable = () => {
     });
     setPaginated(nameFiltered);
   };
+
+  useEffect(() => {
+    setSearch('');
+  }, [currentPage])
 
   useEffect(() => {
     if (employeesReducerData.length) {
@@ -122,6 +127,7 @@ const EmployeeTable = () => {
           <Form.Control
             type="text"
             placeholder="Search by first name/last name"
+            value={search}
             onChange={(e) => handleNameSearch(e)}
           />
         </Col>
@@ -133,9 +139,9 @@ const EmployeeTable = () => {
 
             <Dropdown.Menu>
               <Dropdown.Item eventKey="all">All</Dropdown.Item>
-              <Dropdown.Item eventKey="10000">Less than $10,000</Dropdown.Item>
-              <Dropdown.Item eventKey="20000">$10,000 - $20,000</Dropdown.Item>
-              <Dropdown.Item eventKey="30000">$20,000 - $30,000</Dropdown.Item>
+              <Dropdown.Item eventKey="25000">Less than $25,000</Dropdown.Item>
+              <Dropdown.Item eventKey="50000">$25,000 - $50,000</Dropdown.Item>
+              <Dropdown.Item eventKey="100000">$50,000 - $100,000</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
         </Col>
@@ -152,8 +158,9 @@ const EmployeeTable = () => {
 
       <Row style={{ alignItems: "center", justifyContent: "flex-end" }}>
         <Col xs="6">
+          <p></p>
           <p>
-            Showing {startCount}-{endCount} of {employeesList.length} entries
+          Count: {paginated.length} | Showing {startCount}-{endCount} of {employeesList.length} entries
           </p>
         </Col>
         <Col xs="6" style={{ display: "flex", justifyContent: "flex-end" }}>
