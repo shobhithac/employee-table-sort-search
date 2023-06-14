@@ -126,7 +126,7 @@ const [search, setSearch] = useState('')
         <Col xs="6">
           <Form.Control
             type="text"
-            placeholder="Search by first name/last name"
+            placeholder="Search by First Name / Last Name"
             value={search}
             onChange={(e) => handleNameSearch(e)}
           />
